@@ -6,8 +6,10 @@ import numpy as np
 import astropy.io.ascii as ascii
 import healpy as hp
 import random
-from numpy import random, pi
+#from numpy import random, pi
 from multiprocessing import Process
+from numba import jit as njit
+
 
 seed = 55555333
 random.seed(seed)
@@ -15,10 +17,11 @@ random.seed(seed)
 
 def rand_sphere(n):
     z = np.arccos(2 * random.rand(n) - 1) - np.pi/2.0  # uniform in -1, 1
-    t = 2 * pi * random.rand(n)   # uniform in 0, 2*pi
+    t = 2 * np.pi * random.rand(n)   # uniform in 0, 2*pi
     return t, z
 
 
+@njit
 def analysis(ran_cat, nmin, nmax, flux_cut):
 
     fname_TGSS = "/dataspace/sandeep/Angcor/input/TGSSADR1_7sigma_catalog.tsv"
@@ -60,7 +63,7 @@ def analysis(ran_cat, nmin, nmax, flux_cut):
 
     z = np.zeros(len(dec))
     print len(ra)
-    name = "/dataspace/sandeep/Angcor/TGSS/data_Cat/TGSS_50mJy.txt"
+    name = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_50mJy.txt"
     np.savetxt(name, zip(ra, dec, z, flux), fmt='%f', delimiter='\t', newline='\n')
 
     # This is the section for Random Catalog
