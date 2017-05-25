@@ -2,7 +2,6 @@
 This routine is to create data and 1000 random catalog
 """
 
-
 import numpy as np
 import astropy.io.ascii as ascii
 import healpy as hp
