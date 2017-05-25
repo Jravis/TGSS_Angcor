@@ -168,8 +168,8 @@ Nbootstraps = 10
 name = "../out_data/ranCat_CUTE_%d.txt" % seed[0]
 print name
     
-ra_R = np.genfromtxt(name,usecols=0, delimiter='\t')
-dec_R =np.genfromtxt(name,usecols=1, delimiter='\t')
+ra_R = np.genfromtxt(name, usecols=0, delimiter='\t')
+dec_R =np.genfromtxt(name, usecols=1, delimiter='\t')
 Nr = (1.0*len(ra_R))
 data_R = np.asarray(ra_dec_to_xyz(ra_R, dec_R), order='F').T
 
@@ -177,7 +177,7 @@ xi, xi1 = two_point(data, bins_transform, method='standard', data_R=data_R,
                random_state=None)
 
 
-bins2 = np.linspace(0.2,11,19)
+bins2 = np.linspace(0.2, 11, 19)
 
 costerm = 1-np.cos(np.radians(bins1)) 
 sinterm = np.sin(np.radians(bins1)) 
