@@ -123,105 +123,96 @@ def two_point(data, bins, method='standard', data_R=None, random_state=None):
     return corr, corr1
 
 
-def angcor(nmin, nmax, flux, fname_data):
+def angcor(nmin, nmax, flux):
     """
-
     :param nmin:
     :param nmax:
     :return:
     """
-
+    fname_data = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_%dmJy.txt" % flux
     ra_data = np.genfromtxt(fname_data,usecols=0, delimiter='\t')
     dec_data = np.genfromtxt(fname_data,usecols=1, delimiter='\t')
 
-    Nd1 = (1.0*len(ra_data))
     data = np.asarray(ra_dec_to_xyz(ra_data, dec_data), order='F').T
-
     bins1 = 10 ** np.linspace(np.log10(0.001), np.log10(10), 50)
     bins_transform = angular_dist_to_euclidean_dist(bins1)
-    print bins1
 
     for i in xrange(nmin, nmax):
-        name = "../3.5mJyPerBeamRmsNoise_SingleSource/ranCat_CUTE_%d.txt" % i
+        name = "/dataspace/sandeep/Angcor/TGSS_data/random_Cat/ranCat_CUTE_%d.txt" % i
         ra_R = np.genfromtxt(name, usecols=0, delimiter='\t')
         dec_R = np.genfromtxt(name, usecols=1, delimiter='\t')
-        Nr = (1.0*len(ra_R))
         data_R = np.asarray(ra_dec_to_xyz(ra_R, dec_R), order='F').T
         xi, xi1 = two_point(data, bins_transform, method='standard', data_R=data_R, random_state=None)
 
-        name = "/home/sandeep/CUTE-master/Angcor/3.5mJyPerBeamRmsNoise_SingleSource/Corr_data/angCor_%dmJy_%d.txt" % \
+        name = "/dataspace/sandeep/Angcor/TGSS_data/Corr_data/angCor_%dmJy_%d.txt" % \
                (flux, i)
-        np.savetxt(name, zip(bins1, xi1, xi), delimiter='\t')
+        np.savetxt(name, zip(bins1, xi1, xi), delimiter=',', fmt='%0.6e', header='theta,Corr,AvgCorr')
 
 
 if __name__ == "__main__":
 
-    print "Do you want random catalog Y/N "
-    key = raw_input("")
-    if key == 'Y':
-        rancat = True
-    else:
-        rancat = False
-
     print "Enter which flux cut you want"
     cut = float(raw_input())
 
-    Cell_Count1 = Process(target=angcor, args=(rancat, 1, 31, cut))
+    Cell_Count1 = Process(target=angcor, args=(1, 31, cut))
     Cell_Count1.start()
-    Cell_Count2 = Process(target=angcor, args=(rancat, 31, 61, cut))
+    Cell_Count2 = Process(target=angcor, args=(31, 61, cut))
     Cell_Count2.start()
-    Cell_Count3 = Process(target=angcor, args=(rancat, 61, 91, cut))
+    Cell_Count3 = Process(target=angcor, args=(61, 91, cut))
     Cell_Count3.start()
-    Cell_Count4 = Process(target=angcor, args=(rancat, 91, 121, cut))
+    Cell_Count4 = Process(target=angcor, args=(91, 121, cut))
     Cell_Count4.start()
-    Cell_Count5 = Process(target=angcor, args=(rancat,  121, 151, cut))
+    Cell_Count5 = Process(target=angcor, args=(121, 151, cut))
     Cell_Count5.start()
-    Cell_Count6 = Process(target=angcor, args=(rancat, 151, 181, cut))
+    Cell_Count6 = Process(target=angcor, args=(151, 181, cut))
     Cell_Count6.start()
-    Cell_Count7 = Process(target=angcor, args=(rancat, 181, 211, cut))
+    Cell_Count7 = Process(target=angcor, args=(181, 211, cut))
     Cell_Count7.start()
-    Cell_Count8 = Process(target=angcor, args=(rancat, 211, 241, cut))
+    Cell_Count8 = Process(target=angcor, args=(211, 241, cut))
     Cell_Count8.start()
-    Cell_Count9 = Process(target=angcor, args=(rancat, 241, 271, cut))
+    Cell_Count9 = Process(target=angcor, args=(241, 271, cut))
     Cell_Count9.start()
-    Cell_Count10 = Process(target=angcor, args=(rancat, 271, 301, cut))
+    Cell_Count10 = Process(target=angcor, args=(271, 301, cut))
     Cell_Count10.start()
-    Cell_Count11 = Process(target=angcor, args=(rancat, 301, 331, cut))
+    Cell_Count11 = Process(target=angcor, args=(301, 331, cut))
     Cell_Count11.start()
-    Cell_Count12 = Process(target=angcor, args=(rancat, 331, 361, cut))
+    Cell_Count12 = Process(target=angcor, args=(331, 361, cut))
     Cell_Count12.start()
-    Cell_Count13 = Process(target=angcor, args=(rancat, 361, 391, cut))
+    Cell_Count13 = Process(target=angcor, args=(361, 391, cut))
     Cell_Count13.start()
-    Cell_Count14 = Process(target=angcor, args=(rancat, 391, 421, cut))
+    Cell_Count14 = Process(target=angcor, args=(391, 421, cut))
     Cell_Count14.start()
-    Cell_Count15 = Process(target=angcor, args=(rancat, 421, 451, cut))
+    Cell_Count15 = Process(target=angcor, args=(421, 451, cut))
     Cell_Count15.start()
-    Cell_Count16 = Process(target=angcor, args=(rancat, 451, 481, cut))
+    Cell_Count16 = Process(target=angcor, args=(451, 481, cut))
     Cell_Count16.start()
-    Cell_Count17 = Process(target=angcor, args=(rancat, 511, 541, cut))
+    Cell_Count17 = Process(target=angcor, args=(511, 541, cut))
     Cell_Count17.start()
-    Cell_Count18 = Process(target=angcor, args=(rancat, 541, 571, cut))
+    Cell_Count18 = Process(target=angcor, args=(541, 571, cut))
     Cell_Count18.start()
-    Cell_Count19 = Process(target=angcor, args=(rancat, 571, 601, cut))
+
+    """
+    Cell_Count19 = Process(target=angcor, args=(571, 601, cut))
     Cell_Count19.start()
-    Cell_Count20 = Process(target=angcor, args=(rancat, 601, 631, cut))
+    Cell_Count20 = Process(target=angcor, args=(601, 631, cut))
     Cell_Count20.start()
-    Cell_Count21 = Process(target=angcor, args=(rancat, 631, 661, cut))
+    Cell_Count21 = Process(target=angcor, args=(631, 661, cut))
     Cell_Count21.start()
-    Cell_Count22 = Process(target=angcor, args=(rancat, 661, 691, cut))
+    Cell_Count22 = Process(target=angcor, args=(661, 691, cut))
     Cell_Count22.start()
-    Cell_Count23 = Process(target=angcor, args=(rancat, 691, 721, cut))
+    Cell_Count23 = Process(target=angcor, args=(691, 721, cut))
     Cell_Count23.start()
-    Cell_Count24 = Process(target=angcor, args=(rancat, 721, 751, cut))
+    Cell_Count24 = Process(target=angcor, args=(721, 751, cut))
     Cell_Count24.start()
-    Cell_Count25 = Process(target=angcor, args=(rancat, 751, 781, cut))
+    Cell_Count25 = Process(target=angcor, args=(751, 781, cut))
     Cell_Count25.start()
-    Cell_Count26 = Process(target=angcor, args=(rancat, 781, 831, cut))
+    Cell_Count26 = Process(target=angcor, args=(781, 831, cut))
     Cell_Count26.start()
-    Cell_Count27 = Process(target=angcor, args=(rancat, 831, 861, cut))
+    Cell_Count27 = Process(target=angcor, args=(831, 861, cut))
     Cell_Count27.start()
-    Cell_Count28 = Process(target=angcor, args=(rancat, 861, 900, cut))
+    Cell_Count28 = Process(target=angcor, args=(861, 900, cut))
     Cell_Count28.start()
+    """
 
     Cell_Count1.join()
     Cell_Count2.join()
@@ -241,6 +232,9 @@ if __name__ == "__main__":
     Cell_Count16.join()
     Cell_Count17.join()
     Cell_Count18.join()
+
+
+    """
     Cell_Count19.join()
     Cell_Count20.join()
     Cell_Count21.join()
@@ -251,8 +245,7 @@ if __name__ == "__main__":
     Cell_Count26.join()
     Cell_Count27.join()
     Cell_Count28.join()
-
-
+    """
 
 
 

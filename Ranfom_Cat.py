@@ -21,7 +21,6 @@ def rand_sphere(n):
     return t, z
 
 
-@njit
 def analysis(ran_cat, nmin, nmax, flux_cut):
 
     fname_TGSS = "/dataspace/sandeep/Angcor/input/TGSSADR1_7sigma_catalog.tsv"
@@ -71,7 +70,7 @@ def analysis(ran_cat, nmin, nmax, flux_cut):
     if ran_cat:
 
         nsample = 5*len(ra)
-        print nsample
+#        print nsample
         for nn in xrange(nmin, nmax):
 
             Ra_rand = []
@@ -91,11 +90,13 @@ def analysis(ran_cat, nmin, nmax, flux_cut):
                     Random_map[ipix] += 1
                     Count += 1
 
-            print len(Ra_rand)
+#            print len(Ra_rand)
             z = np.zeros(len(Ra_rand))
             name = "/dataspace/sandeep/Angcor/TGSS_data/random_Cat/ranCat_CUTE_%d.txt" % nn
             np.savetxt(name, zip(Ra_rand, Dec_rand, z), fmt='%f', delimiter='\t', newline='\n')
-
+            del Ra_rand
+            del Dec_rand
+            del z
 
 if __name__ == "__main__":
 
