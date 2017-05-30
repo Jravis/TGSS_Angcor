@@ -138,7 +138,7 @@ def angcor(nmin, nmax, flux):
     bins_transform = angular_dist_to_euclidean_dist(bins1)
 
     for i in xrange(nmin, nmax):
-        name = "/dataspace/sandeep/Angcor/TGSS_data/random_Cat/ranCat_CUTE_%d.txt" % i
+        name = '/dataspace/sandeep/Angcor/TGSS_data/random_Cat/ranCat_CUTE_%d.txt' % i
         ra_R = np.genfromtxt(name, usecols=0, delimiter='\t')
         dec_R = np.genfromtxt(name, usecols=1, delimiter='\t')
         data_R = np.asarray(ra_dec_to_xyz(ra_R, dec_R), order='F').T
