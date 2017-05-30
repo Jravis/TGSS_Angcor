@@ -154,6 +154,7 @@ if __name__ == "__main__":
     print "Enter which flux cut you want"
     cut = float(raw_input())
 
+    """
     Cell_Count1 = Process(target=angcor, args=(1, 31, cut))
     Cell_Count1.start()
     Cell_Count2 = Process(target=angcor, args=(31, 61, cut))
@@ -212,8 +213,8 @@ if __name__ == "__main__":
     Cell_Count27.start()
     Cell_Count28 = Process(target=angcor, args=(861, 900, cut))
     Cell_Count28.start()
-    """
 
+    """
     Cell_Count1.join()
     Cell_Count2.join()
     Cell_Count3.join()
@@ -233,7 +234,6 @@ if __name__ == "__main__":
     Cell_Count17.join()
     Cell_Count18.join()
 
-
     """
     Cell_Count19.join()
     Cell_Count20.join()
@@ -245,7 +245,6 @@ if __name__ == "__main__":
     Cell_Count26.join()
     Cell_Count27.join()
     Cell_Count28.join()
-    """
 
 
 

@@ -62,7 +62,8 @@ def analysis(ran_cat, nmin, nmax, flux_cut):
 
     z = np.zeros(len(dec))
     print len(ra)
-    name = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_50mJy.txt"
+    name = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_%0.1fmJy.txt" % flux_cut
+
     np.savetxt(name, zip(ra, dec, z, flux), fmt='%f', delimiter='\t', newline='\n')
 
     # This is the section for Random Catalog
