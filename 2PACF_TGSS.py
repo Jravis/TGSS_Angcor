@@ -129,7 +129,7 @@ def angcor(nmin, nmax, flux):
     :param nmax:
     :return:
     """
-    fname_data = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_%dmJy.txt" % flux
+    fname_data = "/dataspace/sandeep/Angcor/TGSS_data/data_Cat/TGSS_%0.1fmJy.txt" % flux
     ra_data = np.genfromtxt(fname_data,usecols=0, delimiter='\t')
     dec_data = np.genfromtxt(fname_data,usecols=1, delimiter='\t')
 
@@ -144,16 +144,15 @@ def angcor(nmin, nmax, flux):
         data_R = np.asarray(ra_dec_to_xyz(ra_R, dec_R), order='F').T
         xi, xi1 = two_point(data, bins_transform, method='standard', data_R=data_R, random_state=None)
 
-        name = "/dataspace/sandeep/Angcor/TGSS_data/Corr_data/angCor_%dmJy_%d.txt" % \
+        name = "/dataspace/sandeep/Angcor/TGSS_data/Corr_data/%dmJy_data/angCor_%d.txt" % \
                (flux, i)
         np.savetxt(name, zip(bins1, xi1, xi), delimiter=',', fmt='%0.6e', header='theta,Corr,AvgCorr')
 
 
 if __name__ == "__main__":
 
-    print "Enter which flux cut you want"
-    cut = float(raw_input())
-
+    #print "Enter which flux cut you want"
+    #cut = float(raw_input())
     """
     Cell_Count1 = Process(target=angcor, args=(1, 31, cut))
     Cell_Count1.start()
@@ -192,7 +191,6 @@ if __name__ == "__main__":
     Cell_Count18 = Process(target=angcor, args=(541, 571, cut))
     Cell_Count18.start()
 
-    """
     Cell_Count19 = Process(target=angcor, args=(571, 601, cut))
     Cell_Count19.start()
     Cell_Count20 = Process(target=angcor, args=(601, 631, cut))
@@ -205,14 +203,18 @@ if __name__ == "__main__":
     Cell_Count23.start()
     Cell_Count24 = Process(target=angcor, args=(721, 751, cut))
     Cell_Count24.start()
-    Cell_Count25 = Process(target=angcor, args=(751, 781, cut))
-    Cell_Count25.start()
-    Cell_Count26 = Process(target=angcor, args=(781, 831, cut))
-    Cell_Count26.start()
-    Cell_Count27 = Process(target=angcor, args=(831, 861, cut))
-    Cell_Count27.start()
-    Cell_Count28 = Process(target=angcor, args=(861, 900, cut))
-    Cell_Count28.start()
+    """
+    #Cell_Count25 = Process(target=angcor, args=(751, 781, cut))
+    #Cell_Count25.start()
+    #Cell_Count26 = Process(target=angcor, args=(781, 831, cut))
+    #Cell_Count26.start()
+    #Cell_Count27 = Process(target=angcor, args=(831, 861, cut))
+    #Cell_Count27.start()
+    #Cell_Count28 = Process(target=angcor, args=(861, 900, cut))
+   # Cell_Count28.start()
+    Cell_Count29 = Process(target=angcor, args=(830, 831, 100.0))
+    Cell_Count29.start()
+
 
     """
     Cell_Count1.join()
@@ -234,17 +236,18 @@ if __name__ == "__main__":
     Cell_Count17.join()
     Cell_Count18.join()
 
-    """
     Cell_Count19.join()
     Cell_Count20.join()
     Cell_Count21.join()
     Cell_Count22.join()
     Cell_Count23.join()
     Cell_Count24.join()
-    Cell_Count25.join()
-    Cell_Count26.join()
-    Cell_Count27.join()
-    Cell_Count28.join()
+    """
+#    Cell_Count25.join()
+#    Cell_Count26.join()
+#    Cell_Count27.join()
+#    Cell_Count28.join()
+    Cell_Count29.join()
 
 
 
