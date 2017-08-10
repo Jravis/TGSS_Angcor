@@ -115,9 +115,6 @@ def two_point(data, bins, method='standard', data_R=None, random_state=None):
     DD = (counts_DD)
     RR = (counts_RR)
 
-
-
-
     # check for zero in the denominator
     RR_zero = (RR == 0)
     RR[RR_zero] = 1

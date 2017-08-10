@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from astroML.plotting import hist
 from scipy.integrate import simps
+
+
 H0 = 70.
 C = 3e5
 Omega_lam = 0.7
@@ -131,7 +133,8 @@ plt.title("Redshift distribution")
 
 
 plt.figure(2, figsize=(8, 6))
-plt.plot(bin_edges[:-1], y, 'bo', label='SpecZ data')
+#plt.plot(bin_edges[:-1], y, 'bo', label='SpecZ data')
+plt.plot(bin_edges[:-1], y, 'bo', label='PhotoZ data')
 plt.plot(dist_z, dn_dz, 'r', label='fit')
 plt.minorticks_on()
 plt.tick_params(axis='both', which='minor', length=5, width=2, labelsize=14)
@@ -142,8 +145,8 @@ plt.xscale("log")
 plt.legend()
 plt.legend(loc=1)
 plt.title("Redshift distribution")
-#plt.ylim(0, 50)
-#plt.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/QuasarSpecred_autobin_dist.eps', dpi=100)
+plt.ylim(0, 310)
+plt.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/PhotoGalaxySpecred_autobin_dist.png', dpi=600)
 
 
 dN_dz = []
@@ -154,12 +157,12 @@ for i in xrange(len(dn_dz)-1):
 del dn_dz
 dn_dz = dN_dz
 
-indx = 1.78291
+indx = 1.8
 epsi = [indx - 3, 0]  # This should roughly the case describing the evolution of 2PCF in theories
 # where galaxies identified
 
-r0 = [5., 8., 10., 15.]
-col = ['r', 'b', 'y', 'c', 'g', 'k', 'orange', 'm']
+r0 = [6.5, 7., 7.2, 7.5, 8.0]
+col = ['r', 'b', 'y', 'c', 'g', 'k', 'orange', 'm', 'crimson','lightgreen']
 theta = 10 ** np.linspace(np.log10(0.001), np.log10(10), 50)
 count = 0
 
@@ -167,7 +170,7 @@ plt.figure(3, figsize=(8, 6))
 for r in r0:
     for i in xrange(len(epsi)):
         w = correaltion(theta, indx, epsi[i], dn_dz, dist_z, zmin, zmax, r)
-        fname = '/dataspace/sandeep/Angcor/TGSS_data/limber_data/Galaxy/limber_r0-%0.1f_epsi.%0.1f.txt' % (r, indx)
+        fname = '/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/index_1.8/limber_r0-%0.1f_epsi.%0.1f.txt' % (r, epsi[i])
         print fname
         np.savetxt(fname, zip(w, theta), fmt='%0.6e', delimiter='\t')
         plt.plot(theta, w, '-', color=col[count], linewidth=3, label='(%0.1f Mpc, %0.1f)' % (r, epsi[i]))
