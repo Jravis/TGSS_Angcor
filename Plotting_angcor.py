@@ -135,14 +135,14 @@ theta_lim = 10 ** np.linspace(np.log10(0.001), np.log10(10), 50)
 w = np.zeros((10, len(theta_lim)), dtype=np.float64)
 
 indx = 1.8
-r0 = [6.5, 7., 7.2, 7.5, 8.0]
+r0 = [15.0, 16.0, 17.0, 18.0, 20.0]
 col = ['r', 'b', 'y', 'c', 'g', 'k', 'orange', 'm', 'crimson','lightgreen']
 #theta = 10 ** np.linspace(np.log10(0.001), np.log10(10), 50)
 epsi = [indx - 3, 0]
 count = 0
 for r in r0:
     for i in xrange(len(epsi)):
-        fname = '/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/index_1.8/limber_r0-%0.1f_epsi.%0.1f.txt' % (r, epsi[i])
+        fname = '/dataspace/sandeep/Angcor/TGSS_data/limber_data/Quasar/index_1.8/limber_r0-%0.1f_epsi.%0.1f.txt' % (r, epsi[i])
         w[count, :] = np.genfromtxt(fname, usecols=0, delimiter='\t')
         count+=1
 
@@ -236,7 +236,7 @@ plt.legend(loc=3, prop={'size': 9})
 
 
 fig.tight_layout() # Or equivalently,  "plt.tight_layout()"
-fig.savefig("/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/index_1.8/limber.png", dpi=600)
+#fig.savefig("/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/index_1.8/limber.png", dpi=600)
 
 
 plt.show()
