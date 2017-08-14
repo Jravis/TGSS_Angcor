@@ -1,7 +1,4 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import lmfit
-import emcee
 import corner
 
 name = "/dataspace/sandeep/Angcor/TGSS_data/Corr_data/50mJy_data/angCor_%dmJy_%d.txt" % (50, 1)
