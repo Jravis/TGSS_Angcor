@@ -133,8 +133,8 @@ plt.title("Redshift distribution")
 
 
 plt.figure(2, figsize=(8, 6))
-plt.plot(bin_edges[:-1], y, 'bo', label='SpecZ data')
-#plt.plot(bin_edges[:-1], y, 'bo', label='PhotoZ data')
+#plt.plot(bin_edges[:-1], y, 'bo', label='SpecZ data')
+plt.plot(bin_edges[:-1], y, 'bo', label='PhotoZ data')
 plt.plot(dist_z, dn_dz, 'r', label='fit')
 plt.minorticks_on()
 plt.tick_params(axis='both', which='minor', length=5, width=2, labelsize=14)
@@ -145,10 +145,10 @@ plt.xscale("log")
 plt.legend()
 plt.legend(loc=1)
 plt.title("Redshift distribution")
-#plt.ylim(0, 310)
-plt.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Quasar/QuasarSpecred_autobin_dist.png', dpi=600)
+plt.ylim(-50, 310)
+plt.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/PhotoGalaxy_autobin_dist.png', dpi=600)
 
-
+"""
 dN_dz = []
 for i in xrange(len(dn_dz)-1):
     dN_dz.append((dn_dz[i+1]-dn_dz[i])/np.diff(dist_z)[0])
@@ -180,4 +180,5 @@ for r in r0:
     #    plt.ylim(0.0006, 0.03)
         count += 1
 plt.legend()
+"""
 plt.show()

@@ -118,7 +118,7 @@ dn_dz = dN_dz
 name = "/dataspace/sandeep/Angcor/TGSS_data/Corr_data/50mJy_data/angCor_%dmJy_%d.txt" % (50, 1)
 theta = np.genfromtxt(name, usecols=0, delimiter=',')
 
-flx = [50]#, 60, 100, 200]
+flx = [200]#, 60, 100, 200]
 mean1 = np.zeros((4, len(theta)), dtype=np.float64)
 std_dev = np.zeros((4, len(theta)), dtype=np.float64)
 
@@ -149,7 +149,7 @@ x = theta
 y_err = std_dev[0, :]
 
 print("Statistics for theta>1.0")
-index = (x > 1.0)  #* (x <= 1.0)
+index = (x <= 1.0)  #* (x <= 1.0)
 data = np.zeros((3, len(x[index])), dtype=np.double)
 data[0, :] = x[index]
 data[1, :] = y[index]
@@ -157,9 +157,9 @@ data[2, :] = y_err[index]
 
 
 pars = lmfit.Parameters()
-pars.add('r0', value=5.5, min=2.0, max=10.0)
-#pars.add('indx', value=1.72, min=1.65, max=1.9)
-pars.add('indx', value=1.72, min=0.5, max=2.0)
+pars.add('r0', value=5.5, min=2.0, max=20.0)
+pars.add('indx', value=1.72, min=0.5, max=3.0)
+
 theta1 = x[index]
 
 
@@ -186,8 +186,12 @@ mi = lmfit.Minimizer(residual, pars)
 out1 = mi.minimize(method='diffrential evolution')
 mini = lmfit.Minimizer(lnprob, out1.params)
 
-res = mini.emcee(burn=300, steps=2000, thin=10, nwalkers=100, workers=20, is_weighted=False,
+#res = mini.emcee(burn=300, steps=2000, thin=10, nwalkers=200, workers=20, is_weighted=False,
+#                 params=mi.params, seed=1230127)
+
+res = mini.emcee(burn=300, steps=2000, thin=10, nwalkers=50, workers=10, is_weighted=False,
                  params=mi.params, seed=1230127)
+
 
 print('------------------------------------------')
 print("median of posterior probability distribution")
@@ -201,7 +205,8 @@ fig1 = corner.corner(res.flatchain, bins=200, labels=res.var_names,
                     quantiles=[0.16, 0.5, 0.84], show_titles=True, labels_args={"fontsize": 40})
 
 fig1.set_size_inches(8, 6)
-fig1.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/PhotoGalaxyemcee_TGSS_fit.png', dpi=600)
+#fig1.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Photo_Galaxy/PhotoGalaxyemcee_TGSS_fit_200mJy.png', dpi=600)
+#fig1.savefig('/dataspace/sandeep/Angcor/TGSS_data/limber_data/Galaxy/Galaxyemcee_TGSS_fit_200mJy.png', dpi=600)
 
 
 highest_prob = np.argmax(res.lnprob)
